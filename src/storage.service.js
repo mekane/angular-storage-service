@@ -1,7 +1,7 @@
-angular.module('mekane')
+angular.module('mekane',[])
 .service('storage', storageService);
 
-function storageService( $q, $http, node ){
+function storageService( $q, $http ){
 
     var defaults = {
         dbHost: 'http://couch-server:5984',
@@ -27,7 +27,7 @@ function storageService( $q, $http, node ){
 
         function saveInMemory( data ){
             return $q(function(resolve, reject){
-                var id = data.id || node.generateUuid();
+                var id = data.id || generateUuid();
                 data['id'] = id;
                 memStore[id] = data;
                 resolve(id);
@@ -86,5 +86,20 @@ function storageService( $q, $http, node ){
                 });
             });
         }
+    }
+
+    function generateUuid(){
+    /*
+     * @license
+     * angular-uuid-service v0.0.1
+     * (c) 2014 Daniel Lamb http://daniellmb.com
+     * License: MIT
+     */
+        var time = new Date().getTime(), sixteen = 16;
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (match) {
+            var remainder = (time + sixteen * Math.random()) % sixteen | 0;
+            time = Math.floor(time / sixteen);
+            return (match == "x" ? remainder : remainder & 7 | 8).toString(sixteen);
+        });
     }
 }
