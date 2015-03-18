@@ -1,4 +1,4 @@
-angular.module('mekane',[])
+angular.module('storage',[])
 .service('storage', storageService);
 
 function storageService( $q, $http ){

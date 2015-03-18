@@ -2,7 +2,7 @@ describe('The Storage service', function() {
 
     var theStorageService;
     beforeEach(function(){
-        module('mekane');
+        module('storage');
 
         inject(function( storage ){
             theStorageService = storage;
